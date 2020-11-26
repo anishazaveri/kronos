@@ -15,6 +15,7 @@ twilio_client = Client(http_client=proxy_client)
 
 def find_reminders_due():
     reminders = read_reminder_json()
+    print(reminders)
     reminders_due = [
         reminder for reminder in reminders
         if reminder['due_date'] == str(date.today())

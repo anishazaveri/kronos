@@ -1,0 +1,11 @@
+{
+    "reminders": [
+        {
+            "id": "bd5202a299e5411dbb856d4db7e65f89",
+            "phone_number": "+19172425527",
+            "message": "Happy birthday to you",
+            "interval": "monthly",
+            "due_date": "2020-12-26"
+        }
+    ]
+}

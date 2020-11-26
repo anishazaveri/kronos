@@ -28,13 +28,13 @@ def find_reminders_due():
 def send_sms_reminder(reminders):
     for reminder in reminders:
         twilio_from = os.getenv("TWILIO_SMS_FROM")
-        print(twilio_from)
         to_phone_number = reminder['phone_number']
+        print(twilio_from, to_phone_number)
         twilio_client.messages.create(
             body=reminder['message'],
             from_=f"{twilio_from}",
             to=f"{to_phone_number}")
-        update_due_date(reminder)
+        # update_due_date(reminder)
 
 
 def update_due_date(reminder):

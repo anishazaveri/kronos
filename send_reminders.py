@@ -19,6 +19,7 @@ def find_reminders_due():
         reminder for reminder in reminders
         if reminder['due_date'] == str(date.today())
     ]
+    print(reminders_due)
     if len(reminders_due) > 0:
         send_sms_reminder(reminders_due)
 

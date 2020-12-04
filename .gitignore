@@ -1,2 +1,3 @@
 .env
 dep/*
+last_req.txt

@@ -69,14 +69,14 @@ def parse_body(body):
     # print(body_t, body_c)
 
     # extract date/rrule
-    event = RecurringEvent(now_date=datetime.now())
+    event = RecurringEvent(now_date=datetime.now(tz="America/New_York"))
     datetime_extracted = event.parse(body_t)
     if datetime_extracted is None:
         raise TypeError
     elif type(datetime_extracted) == str:
         # then rrule
         rule = rrulestr(datetime_extracted)
-        next_rem = rule.after(datetime.now())
+        next_rem = rule.after(datetime.now(tz="America/New_York"))
         date_str, time_str = parse_datetime(next_rem)
         rrule = datetime_extracted
         rrule_str = event.format(rrule)

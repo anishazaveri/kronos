@@ -13,10 +13,10 @@ import random
 import json
 load_dotenv()
 
-proxy_client = TwilioHttpClient(proxy={'http': os.getenv(
-    "http_proxy"), 'https': os.getenv("https_proxy")})
-twilio_client = Client(http_client=proxy_client)
-
+# proxy_client = TwilioHttpClient(proxy={'http': os.getenv(
+#     "http_proxy"), 'https': os.getenv("https_proxy")})
+# twilio_client = Client(http_client=proxy_client)
+twilio_client = Client()
 
 app = Flask(__name__)
 
@@ -111,7 +111,7 @@ def set_reminder(body):
     else:
         reply_mess = f"{random.choice(REMINDER_SET_REPLIES)} I will remind {rec_reformat} on {date_str} at {time_str} {body_c}"
     response = requests.post(
-        'https://reminders-api.com/api/applications/23/reminders/', headers=headers, data=data)
+        'https://reminders-api.com/api/applications/24/reminders/', headers=headers, data=data)
     return reply_mess
 
 
@@ -122,7 +122,7 @@ def incoming_sms():
     body = request.values.get('Body', None)
     if body[0:4].lower() == "done":
         reply_mess = random.choice(DONE_REPLIES)
-    if body[0:5].lower() == "thank":
+    elif body[0:5].lower() == "thank":
         reply_mess = "You are welcome!"
     else:
         reply_mess = set_reminder(body)

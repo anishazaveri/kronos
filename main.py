@@ -10,6 +10,7 @@ from recurrent.event_parser import RecurringEvent
 from dateutil.rrule import rrulestr
 import re
 import random
+import pytz
 import json
 load_dotenv()
 
@@ -37,7 +38,8 @@ def parse_snooze(body):
     with open('last_req.txt') as json_file:
         last_req = json.load(json_file)
     # print("Last req", LAST_REQ)
-    event = RecurringEvent(now_date=datetime.now(tz="America/New_York"))
+    event = RecurringEvent(now_date=datetime.now(
+        tz=pytz.timezone("America/New_York")))
     datetime_extracted = event.parse(body)
     rec_person = "Anisha"
     date_str, time_str = parse_datetime(datetime_extracted)
@@ -69,14 +71,16 @@ def parse_body(body):
     # print(body_t, body_c)
 
     # extract date/rrule
-    event = RecurringEvent(now_date=datetime.now(tz="America/New_York"))
+    event = RecurringEvent(now_date=datetime.now(
+        tz=pytz.timezone("America/New_York")))
     datetime_extracted = event.parse(body_t)
     if datetime_extracted is None:
         raise TypeError
     elif type(datetime_extracted) == str:
         # then rrule
         rule = rrulestr(datetime_extracted)
-        next_rem = rule.after(datetime.now(tz="America/New_York"))
+        next_rem = rule.after(datetime.now(
+            tz=pytz.timezone("America/New_York")))
         date_str, time_str = parse_datetime(next_rem)
         rrule = datetime_extracted
         rrule_str = event.format(rrule)

@@ -37,7 +37,7 @@ def parse_snooze(body):
     with open('last_req.txt') as json_file:
         last_req = json.load(json_file)
     # print("Last req", LAST_REQ)
-    event = RecurringEvent(now_date=datetime.now())
+    event = RecurringEvent(now_date=datetime.now(tz="America/New_York"))
     datetime_extracted = event.parse(body)
     rec_person = "Anisha"
     date_str, time_str = parse_datetime(datetime_extracted)

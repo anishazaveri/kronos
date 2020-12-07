@@ -13,10 +13,10 @@ import random
 import json
 load_dotenv()
 
-# proxy_client = TwilioHttpClient(proxy={'http': os.getenv(
-#     "http_proxy"), 'https': os.getenv("https_proxy")})
-# twilio_client = Client(http_client=proxy_client)
-twilio_client = Client()
+proxy_client = TwilioHttpClient(proxy={'http': os.getenv(
+    "http_proxy"), 'https': os.getenv("https_proxy")})
+twilio_client = Client(http_client=proxy_client)
+# twilio_client = Client()
 
 app = Flask(__name__)
 

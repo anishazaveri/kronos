@@ -79,8 +79,10 @@ def parse_body(body):
     elif type(datetime_extracted) == str:
         # then rrule
         rule = rrulestr(datetime_extracted)
-        next_rem = rule.after(datetime.now(
-            tz=pytz.timezone("America/New_York")))
+        now_time = datetime.now(
+            tz=pytz.timezone("America/New_York"))
+        now_time_unaware = now_time.replace(tzinfo=None)
+        next_rem = rule.after(now_time_unaware)
         date_str, time_str = parse_datetime(next_rem)
         rrule = datetime_extracted
         rrule_str = event.format(rrule)
